@@ -17,6 +17,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Temp files
+*.tmp
+.commitmsg.tmp
+
 # Editor / OS
 .DS_Store
 Thumbs.db
