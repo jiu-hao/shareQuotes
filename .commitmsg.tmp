@@ -1,0 +1,19 @@
+fix: 清除主题模板残留并统一 Node 版本声明
+
+theme.ts：
+- hostname 由 mister-hope.github.io 改为本站域名（原先导致 sitemap/RSS
+  的绝对 URL 全部指向他人站点）
+- repo 由 vuepress-theme-hope/vuepress-theme-hope 改为本仓库
+  （原先导航栏 GitHub 图标跳转到主题作者仓库）
+- 联系方式清除 example.com 占位符，改用真实邮箱与 QQ；
+  移除未使用的 Gitee/Gitlab/Gmail 三项假链接
+- author.url 同步修正
+
+package.json：
+- 新增 engines 声明 node ^20.9.0 || >=22.0.0（与 vuepress 官方一致，
+  排除不支持的 21.x）
+- 原 build 脚本会构建到 docs/ 并强推 gh-pages，与 Actions 部署路径冲突，
+  重命名为 deploy:gh-pages 以降低误触
+
+验证：本地构建 22 页通过；sitemap 9 条 URL 全部指向本站且无路径重复；
+robots 的 sitemap 地址正确；23 项检查全通过。

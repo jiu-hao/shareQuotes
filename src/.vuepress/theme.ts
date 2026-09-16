@@ -4,27 +4,24 @@ import { zhNavbar } from "./navbar/index.js";
 import { zhSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
-  hostname: "https://mister-hope.github.io",
+  hostname: "https://jiu-hao.github.io",
 
   author: {
     name: "Roxyy",
-    url: "https://mister-hope.com",
+    url: "https://jiu-hao.github.io/shareQuotes/",
   },
 
   logo: "/logo.svg",
 
-  repo: "vuepress-theme-hope/vuepress-theme-hope",
+  repo: "jiu-hao/shareQuotes",
 
   docsDir: "src",
 
   blog: {
     medias: {
-      Email: "mailto:info@example.com",
-      Gitee: "https://example.com",
-      GitHub: "https://example.com",
-      Gitlab: "https://example.com",
-      Gmail: "mailto:info@example.com",
-      QQ: "https://example.com",
+      Email: "mailto:dsss_13@163.com",
+      GitHub: "https://github.com/jiu-hao",
+      QQ: "https://wpa.qq.com/msgrd?v=3&uin=1204254846&site=qq&menu=yes",
       description: "一个前端开发者",
       intro: "/intro.html",
     },
