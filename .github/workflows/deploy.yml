@@ -1,7 +1,15 @@
 name: Deploy to GitHub Pages
 
+# ---------------------------------------------------------------
+# 触发条件
+#   push 到 main  → 构建 + 发布（CI + CD 全流程）
+#   PR 指向 main  → 只构建、不发布（纯 CI 校验）
+# ---------------------------------------------------------------
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -15,6 +23,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # ----- CI：装依赖 + 构建，验证代码能跑通 -----
   build:
     runs-on: ubuntu-latest
     steps:
@@ -35,15 +44,22 @@ jobs:
       - name: Build
         run: npm run docs:build
 
+      # 以下两步只在真正要发布时才需要。
+      # 注意：if 必须写在用了 uses 的 step 之前，否则 PR 场景不会生效。
       - name: Setup Pages
+        if: github.event_name == 'push'
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
+        if: github.event_name == 'push'
         uses: actions/upload-pages-artifact@v3
         with:
           path: src/.vuepress/dist
 
+  # ----- CD：把 build 产出的 artifact 发布到 GitHub Pages -----
+  # PR 事件不发布；同时上游被跳过时本 job 也整体跳过
   deploy:
+    if: github.event_name == 'push'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

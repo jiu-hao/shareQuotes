@@ -13,7 +13,7 @@
 | 仓库 | https://github.com/jiu-hao/shareQuotes |
 | 主分支 | `main`（另有 `gh-pages`） |
 | Pages Source | **GitHub Actions**（不是 Deploy from a branch） |
-| Workflow | `.github/workflows/deploy.yml` |
+| Workflow | `.github/workflows/deploy.yml`（push main → 构建+发布；PR → 仅构建） |
 | 构建输出 | `src/.vuepress/dist` |
 | base 路径 | `/shareQuotes/`（见 `src/.vuepress/config.ts:6`） |
 
@@ -40,6 +40,9 @@ git add -A && git commit -m "docs: xxx" && git push origin main
 ```
 
 推送后 1-2 分钟自动上线。
+
+**PR 校验**：向 main 提 PR 时只跑构建、不发线上，用来提前发现「合进去才炸」的问题。
+**本地手动部署**：原 `deploy.sh` 与 `npm run deploy:gh-pages` 已废弃删除——线上 Pages Source 是 GitHub Actions，强推 gh-pages 分支不会触发更新。
 
 ---
 
